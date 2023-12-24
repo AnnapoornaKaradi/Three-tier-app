@@ -1,0 +1,8 @@
+- name: Restart services #name of the task 
+  service:            #task is using ansible service module
+    name: "{{ item }}"       #name of the service to manage
+    state: restarted  #parameter specifying service should be restarted
+
+  loop:
+    - nginx
+    - mysql

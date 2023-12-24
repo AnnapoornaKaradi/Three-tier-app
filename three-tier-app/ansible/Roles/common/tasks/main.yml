@@ -1,0 +1,3 @@
+- name: Update apt cache  #name of the task
+  apt_update:   #module to update the apt package cache
+    cache_valid_time: 3600 #specifying the time fow which the package cache is considered valid

@@ -1,0 +1,9 @@
+[Unit]
+Description=Application Two
+
+[Service]
+ExecStart=/usr/bin/python3 /vagrant/app_two/app_two.py
+Restart=always
+
+[Install]
+WantedBy=default.target

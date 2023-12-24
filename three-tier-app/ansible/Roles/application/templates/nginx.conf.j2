@@ -1,0 +1,10 @@
+server {                    #server configuration block for virtual server in nginx
+    listen 80;              #specifying server should listen on port 80 for incoming http request
+    location /db {          #location block that handles requests with the path prefixed with /db
+        proxy_pass http://127.0.0.1:5000/db;    #nginx will forward the request to the backend server at localhost:5000/db
+    }
+
+    location /non-db {      #location block that handles requests with the path prefixed with /non-db
+        proxy_pass http://127.0.0.1:5000/non-db; #nginx will forward the request to the backend server at localhost:5000/non-db
+    }
+}

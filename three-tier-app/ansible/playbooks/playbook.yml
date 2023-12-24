@@ -1,0 +1,15 @@
+- hosts: load_balancer #virtualbox for loadbalancer
+  become: yes
+  roles:
+    - load_balancer
+
+- hosts: application #virtualbox for application
+  become: yes
+  roles:
+    - application
+
+
+- hosts: database #virtualbox for database
+  become: yes
+  roles:
+    - database

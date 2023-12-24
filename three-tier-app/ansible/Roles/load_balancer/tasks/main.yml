@@ -1,0 +1,10 @@
+- name: install nginx   #name of the task 
+  apt:                  #apt module 
+    name: nginx         #name of the package to be installed
+    state: present      #ensures package is present
+
+- name: configure Nginx               #task name
+  template:                           #template module
+    src: templates/nginx.conf.j2      #src template file where nginx config is present
+    dest: /etc/nginx/sites-available/default #dest where file will be copied
+  notify: Restart services

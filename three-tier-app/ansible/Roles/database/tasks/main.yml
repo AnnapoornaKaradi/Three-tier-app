@@ -1,0 +1,30 @@
+- name: Install MySQL   #name of the task
+  apt:                  #apt module
+    name: mysql-server  #name of the package to be installed
+    state: present      #ensures mysql is present
+
+- name: Configure MySQL       #name of the task
+  template:                   #template module
+    src: templates/my.cnf.j2  #src where mysql config is present
+    dest: /etc/mysql/my.cnf   #dest where template file will be copied
+  notify: Restart services    #handler to run
+
+- name: Create MySQL users    #name of the task
+  mysql_user:                 #mysql_user module to manage mysql user account 
+    name: "{{ item.name }}"   #username; iterates over the loop
+    password: "{{ item.password }}"    #password
+    priv: "{{ item.priv }}"     #privileges for the user
+  loop:                 
+    - name: mysql_user_1        #name of the user    
+      password: user_1_password #password
+      priv: "*.*:ALL"           #giving access to all the databases and tables
+    - name: mysql_user_2
+      password: user_2_password
+      priv: "*.*:ALL"
+
+- name: Create MySQL databases  #name of the task
+  mysql_db:                     #mysql_db module to manage mysql databases
+    name: "{{ item }}"          #specifying name of the databases
+  loop:
+    - db_one
+    - db_two
